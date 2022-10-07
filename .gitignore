@@ -41,6 +41,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+node_express_rest_bi
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
