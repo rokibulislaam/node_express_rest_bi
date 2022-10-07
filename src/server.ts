@@ -1,6 +1,12 @@
-import app from './app';
-import { logger } from '@utils';
+import App from './app';
+import Router from 'express';
 
-app.listen(3001, () => {
-  logger.warn('Server listening on port 3001');
-});
+const router = Router();
+const app = new App([
+  {
+    router: router.use('/', (req, res) => {
+      console.log(req.headers);
+    }),
+  },
+]);
+app.startServer();
