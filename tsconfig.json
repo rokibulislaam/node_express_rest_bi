@@ -3,7 +3,7 @@
     "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
-    "typeRoots": ["node_modules/@types"],
+    "typeRoots": ["./src/typeRoots", "node_modules/@types"],
     "declaration": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -21,7 +21,8 @@
       "@repositories": ["./repositories"],
       "@routes": ["./routes"],
       "@services": ["./services"],
-      "@utils": ["./utils"]
+      "@utils": ["./utils"],
+      "@errors": ["./errors"],
     }
   },
   "include": ["src/**/*.ts", "src/**/*.json", ".env"],
