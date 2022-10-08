@@ -1,6 +1,7 @@
 import { JwtPayload } from "jsonwebtoken";
+import { IUser } from "./user.interface";
 
-export interface IJWTPayload extends JwtPayload {
-  userType: 'student' | 'coach',
+export interface IUserJWTPayload extends JwtPayload {
+  userType: IUser['userType'],
   userId: string
 }
