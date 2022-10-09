@@ -1,5 +1,4 @@
 import { IDBQueries } from '@interfaces';
-import { BaseDatabase } from 'database';
 import mongoose from 'mongoose';
 
 /**

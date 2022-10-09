@@ -1,7 +1,8 @@
 import { IRoutes } from '@interfaces';
-import { AuthController } from 'controllers/auth.controller';
+import { AuthController } from '@controllers';
 import { Router } from 'express';
-
+import {autoInjectable} from 'tsyringe'
+@autoInjectable()
 class AuthRoute implements IRoutes {
   public router = Router();
 

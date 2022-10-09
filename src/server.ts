@@ -1,12 +1,10 @@
-import App from './app';
-import Router from 'express';
+import 'reflect-metadata';
 
-const router = Router();
-const app = new App([
-  {
-    router: router.use('/', (req, res) => {
-      console.log(req.headers);
-    }),
-  },
-]);
+import App from './app';
+import { AuthRoute } from '@routes';
+import { container } from 'tsyringe';
+
+const authRoute = container.resolve(AuthRoute);
+const app = new App([authRoute]);
+
 app.startServer();

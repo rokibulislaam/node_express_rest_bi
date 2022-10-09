@@ -2,10 +2,6 @@ import { logger, morganStream } from '@utils';
 import express from 'express';
 import morgan from 'morgan';
 import { IRoutes } from '@interfaces';
-// app.get(
-//   '/',
-//   expressjwt({ secret: 'some_secret', algorithms: ['HS256'] }),
-// );
 
 class App {
   public app: express.Application;
