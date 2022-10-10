@@ -11,7 +11,11 @@ export class UserService extends BaseService<IUser> {
     return this.repository.create(userData);
   }
 
-  async getUserById(id: string) {
-    return this.repository.findOne(id);
+  async getUserById(id: IUser['_id']) {
+    return this.repository.findOne({ _id: id });
+  }
+  async updateUser(userData: Partial<IUser>) {}
+  async getUser(userData: Partial<IUser>) {
+    return this.repository.findOne(userData);
   }
 }

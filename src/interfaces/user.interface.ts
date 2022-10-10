@@ -1,6 +1,7 @@
 import { Types } from 'mongoose';
 
 interface IUser {
+  _id: Types.ObjectId,
   userType: 'student' | 'coach';
   firstName: string;
   lastName: string;
@@ -11,6 +12,7 @@ interface IUser {
   sessions: Types.ObjectId;
   courses: String[];
   tokens: String[];
+  password: string
 }
 
 export { IUser };
