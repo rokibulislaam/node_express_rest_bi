@@ -44,7 +44,10 @@ const userSchema = new Schema<IUser>({
     type: [String],
     default: [],
   },
+  password: {
+    type: String,
+    required: true
+  }
 });
-
 const userModel = model<IUser>('User', userSchema);
 export { userModel };
