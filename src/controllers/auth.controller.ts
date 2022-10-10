@@ -1,24 +1,19 @@
-import { UserService } from '@services';
 import { Request, Response } from 'express';
+import { autoInjectable } from 'tsyringe';
+import _ from 'lodash';
 import { BaseController } from './base.controller';
-// class AuthController {
-//   public userModel = userModel;
-//   constructor() {}
-//   public login(req: Request, res: Response, next: NextFunction) {}
-//   public logout(req: Request, res: Response, next: NextFunction) {}
-//   public signup(req: Request, res: Response, next: NextFunction) {}
-// }
+import { AuthService } from '@services';
 
-// export { AuthController };
-
+@autoInjectable()
 export class AuthController extends BaseController {
-  constructor(protected userService: UserService) {
-    super(userService);
+  constructor(private authService: AuthService) {
+    super(authService);
   }
 
-  async login(req: Request, res: Response) {
-    
-    // const user = this.userService.getUserById('');
-  }
-  
+  login = async (req: Request, res: Response) => {
+    this.authService.login();
+    res.status(200).json({
+      message: 'Login successful',
+    });
+  };
 }

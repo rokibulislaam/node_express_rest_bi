@@ -28,6 +28,8 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.6.5",
     "morgan": "^1.10.0",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.7.0",
     "winston": "^3.8.2"
   }
 }
