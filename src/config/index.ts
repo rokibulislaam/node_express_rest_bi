@@ -1,11 +1,10 @@
 import dotenv from 'dotenv';
-import path from 'path';
+dotenv.config({
+  path: `.env.${process.env.NODE_ENV || 'development'}.local`,
+});
+const config = {
+  jwtSecret: process.env.JWT_SECRET,
+  DB_CONNECTION_STRING: process.env.DB_CONNECTION_STRING,
+};
 
-export default class Config {
-  constructor() {
-    dotenv.config({
-      path: `.env.${process.env.NODE_ENV || 'development'}.local`,
-    });
-  }
-  public static jwtSecret = process.env.JWT_SECRET;
-}
+export default config;

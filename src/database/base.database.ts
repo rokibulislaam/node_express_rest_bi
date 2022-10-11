@@ -1,5 +1,9 @@
 import { IDBQueries } from "@interfaces";
+import { FilterQuery, ProjectionType } from "mongoose";
 
+/**
+ * @deprecated
+ */
 export abstract class BaseDatabase<T> implements IDBQueries<T> {
   create(item: T): Promise<T> {
     throw new Error("Method not implemented.");
@@ -13,7 +17,7 @@ export abstract class BaseDatabase<T> implements IDBQueries<T> {
   find(id: string): Promise<T[]> {
     throw new Error("Method not implemented.");
   }
-  findOne(id: string): Promise<T> {
+  findOne(filter: FilterQuery<T>, projection?: ProjectionType<T> | undefined): Promise<T> {
     throw new Error("Method not implemented.");
   }
 

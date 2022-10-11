@@ -14,18 +14,20 @@ export class AuthService extends BaseService<IUser> {
     super(repository);
   }
 
+  async signup(userData: Partial<IUser>) {
+    return this.repository.create(userData as IUser);
+  }
+  
   /**
    *
    * @param userData
-   * @returns resolves `jwtToken` or rejects with an `Error`
+   * @returns {string} resolves `jwtToken` or rejects with an `errorMessage`
    */
-  async login(
-    userData: Pick<IUser, 'email' | 'password'>
-  ): Promise<string | Error> {
+  async login(userData: Pick<IUser, 'email' | 'password'>): Promise<string> {
     return new Promise(async (resolve, reject) => {
       const user = await this.userService.getUser({ email: userData.email });
-      if (!user.password) {
-        return reject(new Error('Credentials not found'));
+      if (!user?.password) {
+        return reject('Credentials not found');
       }
 
       bcrypt
@@ -38,11 +40,11 @@ export class AuthService extends BaseService<IUser> {
             );
             resolve(jwtToken);
           } else {
-            reject(new Error('Invalid email or password'));
+            reject('Invalid email or password');
           }
         })
         .catch((err) => {
-          reject(new Error('Invalid email or password'));
+          reject('Invalid email or password');
         });
     });
   }

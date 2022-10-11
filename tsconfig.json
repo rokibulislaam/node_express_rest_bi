@@ -24,6 +24,7 @@
       "@services": ["./services"],
       "@utils": ["./utils"],
       "@errors": ["./errors"],
+      "@database": ["./database"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.json", ".env"],
