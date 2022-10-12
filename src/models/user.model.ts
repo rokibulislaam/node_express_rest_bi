@@ -49,5 +49,6 @@ const userSchema = new Schema<IUser>({
     required: true
   }
 });
+// userSchema.pre('')
 const userModel = model<IUser>('User', userSchema);
 export { userModel };

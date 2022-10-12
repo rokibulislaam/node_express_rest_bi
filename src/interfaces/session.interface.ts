@@ -1,8 +1,15 @@
+import mongoose from 'mongoose';
 
-interface ISession {
-  startTime : Date,
-  endTime : Date , 
-  status : String 
+//create interface for online class session
+interface ISession extends mongoose.Document {
+  startTime: Date;
+  endTime: Date;
+  status: String;
+  slots: Slot[];
+  coachId: mongoose.Types.ObjectId,
 }
 
-export {ISession}
+interface Slot {
+  time: Date;
+}
+export { ISession };

@@ -9,10 +9,4 @@ export class UserRepository extends BaseRepository<IUser> {
   constructor() {
     super(userModel);
   }
-  create(item: IUser): Promise<IUser> {
-    return new Promise((resolve, reject) => {
-      console.log("user created")
-      resolve({} as unknown as IUser);
-    });
-  }
 }
