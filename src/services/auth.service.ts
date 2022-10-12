@@ -3,11 +3,11 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import { IUser, IUserJWTPayload } from '@interfaces';
-import { logger } from '@utils';
+import { hashPassword, logger } from '@utils';
 import { UserRepository } from '@repositories';
 import { BaseService } from './base.service';
 import { UserService } from './user.service';
-import Config from '@config';
+import { config } from '@config';
 @autoInjectable()
 export class AuthService extends BaseService<IUser> {
   constructor(repository: UserRepository, private userService: UserService) {
@@ -15,9 +15,16 @@ export class AuthService extends BaseService<IUser> {
   }
 
   async signup(userData: Partial<IUser>) {
-    return this.repository.create(userData as IUser);
+    if (userData.password) {
+      const hashedPassword = await hashPassword(userData.password);
+      console.log({ hashedPassword });
+      return this.repository.create({
+        ...userData,
+        password: hashedPassword,
+      } as IUser);
+    }
   }
-  
+
   /**
    *
    * @param userData
@@ -36,7 +43,7 @@ export class AuthService extends BaseService<IUser> {
           if (isMatched) {
             const jwtToken = jwt.sign(
               { userId: user._id, userType: user.userType },
-              Config.jwtSecret
+              config.jwtSecret
             );
             resolve(jwtToken);
           } else {

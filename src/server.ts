@@ -1,12 +1,13 @@
 import 'reflect-metadata';
 
 import App from './app';
-import { AuthRoute } from '@routes';
+import { AuthRoute, LearnerSessionRoute } from '@routes';
 import { container } from 'tsyringe';
 import { MongoDB } from '@database';
 
-const authRoute = container.resolve(AuthRoute);
 const database = container.resolve(MongoDB);
-const app = new App([authRoute], database);
+const authRoute = container.resolve(AuthRoute);
+const learnerSessionRoute = container.resolve(LearnerSessionRoute);
+const app = new App([authRoute, learnerSessionRoute], database);
 
 app.startServer();

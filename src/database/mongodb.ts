@@ -1,7 +1,7 @@
 import { autoInjectable, singleton } from 'tsyringe';
 import mongoose from 'mongoose';
 import { logger } from '@utils';
-import config from '@config';
+import {config} from '@config';
 
 @autoInjectable()
 @singleton()

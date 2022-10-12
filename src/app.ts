@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import { IRoutes } from '@interfaces';
 import { authMiddleware, errorMiddleware } from '@middlewares';
 import { MongoDB } from '@database';
-import config from '@config';
+import { config } from '@config';
 class App {
   public app: express.Application;
   public env: string;
@@ -38,7 +38,7 @@ class App {
   }
   private initRoutes(routes: IRoutes[]) {
     for (const route of routes) {
-      this.app.use('/', route.router);
+      this.app.use(route.path || '/', route.router);
     }
   }
   private initErrorHandling() {

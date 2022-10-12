@@ -1,8 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { autoInjectable } from 'tsyringe';
 import _ from 'lodash';
-import bcrypt from 'bcrypt'
-
 import { BaseController } from './base.controller';
 import { AuthService } from '@services';
 import { HttpError } from '@errors';
@@ -28,12 +26,25 @@ export class AuthController extends BaseController {
     if (
       !_.some(
         [age, email, firstName, gender, lastName, password, phone, userType],
-        _.isEmpty
+        _.isUndefined
       )
     ) {
-      bcrypt.genSalt(10).then(salt => {
-        bcrypt.hash(password, salt).then()
-      })
+      const user = await this.authService.signup({
+        age,
+        email,
+        firstName,
+        gender,
+        lastName,
+        password,
+        phone,
+        userType,
+      });
+      if (user) {
+        res.status(200).json(user);
+      } else {
+        next(new HttpError(406, 'User not created'));
+      }
+
       // this.authService.signup({age, firstName, lastName, email, pas})
     } else {
       next(new HttpError(400, 'Incomplete user data'));

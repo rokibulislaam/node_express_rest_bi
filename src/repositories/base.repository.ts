@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 /**
  * Using generic repository pattern
  */
-export abstract class BaseRepository<T> implements IDBQueries<T> {
+export abstract class BaseRepository<T> {
   // constructor(private db: BaseDatabase<T>) {}
   constructor(public model: mongoose.Model<T>) {}
 
-  create(item: T): Promise<T> {
-    return this.model.create(item);
+  async create(item: T) {
+    return await this.model.create(item).then((res) => res.toObject())
   }
   update(id: string, item: T): Promise<boolean> {
     throw new Error('Method not implemented.');
